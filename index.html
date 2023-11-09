@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="font-family: 'Lalezar', Arial, sans-serif; font-weight: bold;">LootShop - فروش نیترو و نیتروی کلاسیک در ایران</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5931/5931428.png">
+    <style>
+        body {
+            font-family: 'Lalezar', Arial, sans-serif;
+            background-color: #36393f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #7289da;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .header {
+            background-color: #36393f;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1, .header h2 {
+            color: #fff;
+        }
+
+        .item-box-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .item-box {
+            flex: 0 1 calc(45% - 20px);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            background-color: #36393f;
+            transition: transform 0.2s;
+        }
+
+        .item-box:hover {
+            transform: scale(1.05);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #7289da;
+            border-radius: 5px;
+            background-color: #36393f;
+            color: #fff;
+        }
+
+        .purchase-button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #7289da;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .purchase-button:hover {
+            background-color: #677bc4;
+        }
+
+        .error {
+            color: red;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #ccc;
+            padding: 10px;
+            background-color: #36393f;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .footer-text {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .social-buttons {
+            margin-top: 20px;
+        }
+
+        .social-button {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #7289da;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .social-button:hover {
+            color: #677bc4;
+        }
+        
+        @media (max-width: 768px) {
+            .item-box {
+                flex: 0 1 calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LootShop</h1>
+            <h2>فروش نیترو و نیتروی کلاسیک در ایران</h2>
+        </div>
+        
+        <!-- Item Boxes -->
+        <div class="item-box-container">
+            <!-- Item 1 Box -->
+            <div class="item-box">
+                <img src="https://support.discord.com/hc/user_images/55PTtjKxcf5X2uHi7deJcQ.png" alt="Discord Nitro" style="max-width: 100%; height: auto;">
+                <h3 style="color: #fff;">Discord Nitro</h3>
+                <p style="color: #fff;">قیمت: 100,000 ریال</p>
+                <select id="item1" style="background-color: #36393f; color: #fff; border: 1px solid #7289da; border-radius: 5px;">
+                    <option value="item1">خرید Discord Nitro</option>
+                </select>
+                <button class="purchase-button" onclick="purchase('item1', 'Discord Nitro')">خرید</button>
+            </div>
+            
+            <!-- Item 2 Box -->
+            <div class="item-box">
+                <img src="https://support.discord.com/hc/user_images/wDgPSdKaHV9lUSR2nMko8A.png" alt="Discord Nitro Classic" style="max-width: 100%; height: auto;">
+                <h3 style="color: #fff;">Discord Nitro Classic</h3>
+                <p style="color: #fff;">قیمت: 150,000 ریال</p>
+                <select id="item2" style="background-color: #36393f; color: #fff; border: 1px solid #7289da; border-radius: 5px;">
+                    <option value="item2">خرید Discord Nitro Classic</option>
+                </select>
+                <button class="purchase-button" onclick="purchase('item2', 'Discord Nitro Classic')">خرید</button>
+            </div>
+        </div>
+
+        <p id="errorMessage" class="error">idpay merchant id is invalind</p>
+
+        <!-- Social Media Buttons -->
+        <div class="social-buttons">
+            <a class="social-button" href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a class="social-button" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <!-- Copyright Footer -->
+        <div class="footer">
+            توسط <span class="footer-text" style="color: #fff;">ابوالفضل</span> ساخته شده &copy; 2023
+        </div>
+    </div>
+
+    <script>
+        function purchase(item, itemName) {
+            // فرآیند خرید (می‌توانید اینجا منطق واقعی پرداخت را اضافه کنید)
+            // برای حالت فعلی، فقط یک پیام خطای "شناسه تاجر idpay نامعتبر است" نمایش داده می‌شود
+            document.getElementById("errorMessage").innerText = "idpay merchant id is invalind";
+        }
+    </script>
+</body>
+</html>
